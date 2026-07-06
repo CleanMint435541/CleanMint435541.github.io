@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCZ我的世界 | 0.13-0.14.3 远古PE服务器</title>
+    <style>
+        /* 全局基础样式 可扩充CSS代码增加行数 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        :root {
+            /* 图标路径统一变量，全部图标在这里修改路径即可自定义 */
+            --logo-icon: "./icon/logo.png";
+            --qq-icon: "./icon/qq.png";
+            --server-icon: "./icon/server.png";
+            --world-icon: "./icon/world.png";
+            --plugin-icon: "./icon/plugin.png";
+            --download-icon: "./icon/download.png";
+            --query-icon: "./icon/search.png";
+            --announce-icon: "./icon/notice.png";
+            --bg-color-dark: #0f172a;
+            --bg-card: #1e293b;
+            --color-main: #3b82f6;
+            --color-hover: #60a5fa;
+            --text-white: #f8fafc;
+            --text-gray: #94a3b8;
+            --transition-all: all 0.3s ease;
+        }
+        body {
+            background-color: var(--bg-color-dark);
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+        /* 顶部导航栏 动态效果 */
+        header {
+            width: 100%;
+            height: 70px;
+            background-color: var(--bg-card);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 2px 12px rgba(59, 130, 246, 0.2);
+        }
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: url(var(--logo-icon)) center/contain no-repeat;
+            transition: var(--transition-all);
+        }
+        .logo-icon:hover {
+            transform: rotate(15deg) scale(1.1);
+        }
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-main);
+        }
+        .nav-list {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+        .nav-item a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: var(--transition-all);
+            position: relative;
+        }
+        .nav-item a:hover {
+            color: var(--text-white);
+            background-color: rgba(59, 130, 246, 0.2);
+        }
+        .nav-item a::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-main);
+            transition: var(--transition-all);
+        }
+        .nav-item a:hover::after {
+            width: 80%;
+        }
+        /* 通用按钮样式 全套动态：移入、点击、聚焦 */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition-all);
+            transform: translateY(0);
+        }
+        .btn-primary {
+            background-color: var(--color-main);
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: var(--color-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.35);
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(59, 130, 246, 0.2);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--color-main);
+            color: var(--color-main);
+        }
+        .btn-outline:hover {
+            background-color: rgba(59, 130, 246, 0.15);
+            transform: translateY(-3px);
+        }
+        .btn-icon {
+            width: 20px;
+            height: 20px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        /* 首页横幅区块 */
+        .banner {
+            width: 100%;
+            min-height: 88vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            background: radial-gradient(circle at center, #192b4d 0%, #0f172a 100%);
+        }
+        .banner-title {
+            font-size: 52px;
+            margin-bottom: 16px;
+            background: linear-gradient(90deg, #3b82f6, #818cf8);
+           
