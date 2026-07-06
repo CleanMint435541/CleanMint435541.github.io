@@ -2,40 +2,39 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SCZ我的世界 | 0.13-0.14.3 远古PE服务器</title>
     <style>
-        /* 全局基础样式 可扩充CSS代码增加行数 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Microsoft Yahei", sans-serif;
+            font-family: "Microsoft Yahei", system-ui, sans-serif;
         }
         :root {
-            /* 图标路径统一变量，全部图标在这里修改路径即可自定义 */
-            --logo-icon: "./icon/logo.png";
-            --qq-icon: "./icon/qq.png";
-            --server-icon: "./icon/server.png";
-            --world-icon: "./icon/world.png";
-            --plugin-icon: "./icon/plugin.png";
-            --download-icon: "./icon/download.png";
-            --query-icon: "./icon/search.png";
-            --announce-icon: "./icon/notice.png";
-            --bg-color-dark: #0f172a;
+            /* 自定义图片路径，后期替换图标只需改这里 */
+            --logo-img: "./icon/logo.png";
+            --qq-img: "./icon/qq.png";
+            --server-img: "./icon/server.png";
+            --world-img: "./icon/world.png";
+            --plugin-img: "./icon/plugin.png";
+            --search-img: "./icon/search.png";
+            --download-img: "./icon/download.png";
+            --bg-dark: #0f172a;
             --bg-card: #1e293b;
-            --color-main: #3b82f6;
-            --color-hover: #60a5fa;
+            --main-blue: #3b82f6;
+            --light-blue: #60a5fa;
             --text-white: #f8fafc;
             --text-gray: #94a3b8;
-            --transition-all: all 0.3s ease;
+            --transition: all 0.3s ease;
         }
         body {
-            background-color: var(--bg-color-dark);
+            background-color: var(--bg-dark);
             color: var(--text-white);
             overflow-x: hidden;
+            min-height: 100vh;
         }
-        /* 顶部导航栏 动态效果 */
+        /* 导航栏 */
         header {
             width: 100%;
             height: 70px;
@@ -43,7 +42,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 5%;
+            padding: 0 4%;
             position: sticky;
             top: 0;
             z-index: 999;
@@ -57,8 +56,15 @@
         .logo-icon {
             width: 42px;
             height: 42px;
-            background: url(var(--logo-icon)) center/contain no-repeat;
-            transition: var(--transition-all);
+            background: var(--main-blue);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            transition: var(--transition);
         }
         .logo-icon:hover {
             transform: rotate(15deg) scale(1.1);
@@ -66,11 +72,11 @@
         .logo-text {
             font-size: 22px;
             font-weight: 700;
-            color: var(--color-main);
+            color: var(--main-blue);
         }
         .nav-list {
             display: flex;
-            gap: 36px;
+            gap: 24px;
             list-style: none;
         }
         .nav-item a {
@@ -79,7 +85,7 @@
             font-size: 16px;
             padding: 8px 12px;
             border-radius: 6px;
-            transition: var(--transition-all);
+            transition: var(--transition);
             position: relative;
         }
         .nav-item a:hover {
@@ -94,13 +100,13 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: var(--color-main);
-            transition: var(--transition-all);
+            background-color: var(--main-blue);
+            transition: var(--transition);
         }
         .nav-item a:hover::after {
             width: 80%;
         }
-        /* 通用按钮样式 全套动态：移入、点击、聚焦 */
+        /* 通用按钮样式 全套动态反馈 */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -111,15 +117,15 @@
             font-size: 15px;
             cursor: pointer;
             text-decoration: none;
-            transition: var(--transition-all);
+            transition: var(--transition);
             transform: translateY(0);
         }
         .btn-primary {
-            background-color: var(--color-main);
+            background-color: var(--main-blue);
             color: white;
         }
         .btn-primary:hover {
-            background-color: var(--color-hover);
+            background-color: var(--light-blue);
             transform: translateY(-3px);
             box-shadow: 0 6px 16px rgba(59, 130, 246, 0.35);
         }
@@ -129,8 +135,8 @@
         }
         .btn-outline {
             background: transparent;
-            border: 1px solid var(--color-main);
-            color: var(--color-main);
+            border: 1px solid var(--main-blue);
+            color: var(--main-blue);
         }
         .btn-outline:hover {
             background-color: rgba(59, 130, 246, 0.15);
@@ -139,14 +145,16 @@
         .btn-icon {
             width: 20px;
             height: 20px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        /* 首页横幅区块 */
+        /* 首页横幅 */
         .banner {
             width: 100%;
-            min-height: 88vh;
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -154,9 +162,4 @@
             text-align: center;
             padding: 40px 20px;
             background: radial-gradient(circle at center, #192b4d 0%, #0f172a 100%);
-        }
-        .banner-title {
-            font-size: 52px;
-            margin-bottom: 16px;
-            background: linear-gradient(90deg, #3b82f6, #818cf8);
-           
+      
