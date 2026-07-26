@@ -1,177 +1,199 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Echoland 1.7.10 | 无规则 · 2b2t Style</title>
+    <title>Echoland - The Oldest Anarchy Server in China</title>
     <style>
-        /* === 核心变量与重置 === */
-        :root {
-            --bg-color: #0a0a0a;
-            --text-color: #c0c0c0;
-            --accent-color: #ff3333; /* 2b2t 经典红 */
-            --accent-glow: rgba(255, 51, 51, 0.4);
-            --border-color: #333;
-            --font-main: 'Courier New', Courier, monospace;
+        /* === Global Reset & Base Styles === */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-main);
+            background-color: #333333; /* Classic Dark Grey Background */
+            color: #dddddd;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
             display: flex;
-            flex-direction: column;
-        }
-
-        /* === 顶部导航 & 状态栏 === */
-        header {
-            padding: 15px 30px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(10, 10, 10, 0.95);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(5px);
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #fff;
-            text-shadow: 0 0 10px var(--accent-glow);
-            letter-spacing: 2px;
-        }
-
-        .status-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.8rem;
-            color: var(--accent-color);
-            border: 1px solid var(--accent-color);
-            padding: 4px 10px;
-            border-radius: 2px;
-        }
-
-        .pulse {
-            width: 8px; height: 8px;
-            background: var(--accent-color);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 var(--accent-glow); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 51, 51, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0); }
-        }
-
-        /* === 英雄区域 (Hero Section) === */
-        .hero {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
             justify-content: center;
-            align-items: center;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* === Main Container === */
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background-color: #444444; /* Slightly lighter grey for the main block */
+            padding: 20px;
+            margin: 0;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        /* === Header / Logo Area === */
+        header {
             text-align: center;
-            padding: 60px 20px;
-            position: relative;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: #888;
-            max-width: 600px;
+            padding: 40px 0 20px 0;
+            border-bottom: 2px solid #222;
             margin-bottom: 30px;
         }
 
-        .ip-box {
-            background: #111;
-            border: 1px solid var(--border-color);
-            padding: 15px 30px;
-            font-size: 1.5rem;
+        h1 {
+            font-size: 2.5rem;
             color: #fff;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            user-select: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
         }
 
-        .ip-box:hover { border-color: var(--accent-color); color: var(--accent-color); }
-        .ip-box:active { transform: scale(0.98); }
-
-        /* === 核心功能区 (Grid) === */
-        .grid-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2px; /* 2b2t 风格缝隙 */
-            background: var(--border-color);
-            margin: 0;
-            width: 100%;
-            flex: 2;
-            min-height: 500px;
+        .subtitle {
+            color: #aaa;
+            font-size: 1rem;
+            font-weight: bold;
         }
 
-        .grid-item {
-            background: var(--bg-color);
-            padding: 20px;
+        /* === Navigation / Action Buttons === */
+        .nav-bar {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            text-align: center;
+            background-color: #222;
+            padding: 10px 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+
+        .menu-btn {
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .shop-link {
+            background-color: #666;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 3px;
+            font-size: 0.9rem;
             transition: background 0.3s;
         }
 
-        .grid-item:hover { background: #111; }
+        .shop-link:hover {
+            background-color: #888;
+        }
 
-        .dynmap-frame {
+        /* === Content Sections === */
+        .section {
+            background-color: #3a3a3a;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border-left: 5px solid #555;
+        }
+
+        .section h2 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            border-bottom: 1px solid #555;
+            padding-bottom: 10px;
+        }
+
+        .highlight-green {
+            color: #5cb85c; /* Bootstrap success green */
+            font-weight: bold;
+        }
+
+        .highlight-red {
+            color: #d9534f; /* Bootstrap danger red */
+            font-weight: bold;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        /* === Call to Action (Join IP) === */
+        .cta-box {
+            text-align: center;
+            background-color: #2a2a2a;
+            padding: 40px;
+            border: 2px dashed #555;
+            margin-top: 20px;
+        }
+
+        .server-ip {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.8rem;
+            color: #fff;
+            background: #000;
+            padding: 10px 20px;
+            display: inline-block;
+            margin: 15px 0;
+            border-radius: 4px;
+            user-select: all; /* Makes it easy to copy */
+        }
+
+        .join-btn {
+            display: inline-block;
+            background-color: #5cb85c;
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            margin-top: 10px;
+            transition: transform 0.1s;
+        }
+
+        .join-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* === Map Embed === */
+        .map-container {
+            width: 100%;
+            height: 500px;
+            background-color: #000;
+            border: 1px solid #555;
+            margin-top: 10px;
+        }
+
+        iframe {
             width: 100%;
             height: 100%;
-            min-height: 500px;
             border: none;
-            filter: grayscale(20%) contrast(1.1); /* 增加硬核感 */
         }
 
-        .btn-qq {
-            display: inline-block;
-            background: #12B7F5; /* QQ蓝 */
-            color: #fff;
-            padding: 15px 40px;
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: bold;
-            letter-spacing: 2px;
-            transition: all 0.3s;
-            border: 2px solid #12B7F5;
-        }
-
-        .btn-qq:hover {
-            background: transparent;
-            color: #12B7F5;
-            box-shadow: 0 0 15px rgba(18, 183, 245, 0.4);
-        }
-
-        /* === 规则警告 (2b2t 灵魂) === */
-        .warning-strip {
-            background: var(--accent-color);
-            color: #000;
-            padding: 10px;
+        /* === Footer === */
+        footer {
             text-align: center;
-            font-weight: bo
+            padding: 40px 0;
+            color: #777;
+            font-size: 0.8rem;
+            border-top: 1px solid #444;
+            margin-top: 40px;
+        }
+
+        /* === Mobile Responsiveness === */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .server-i
